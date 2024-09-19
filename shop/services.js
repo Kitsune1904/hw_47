@@ -36,7 +36,7 @@ export const registrationUser = async (req, res) => {
             ...newUser,
             password: hashedPassword
         })
-        res.status(201).send(newUser)
+        res.status(201).json(newUser)
     } catch (error) {
         console.error('Error registration:', error);
         res.status(500).send('Internal server error');
@@ -45,7 +45,7 @@ export const registrationUser = async (req, res) => {
 
 export const getAllProducts = (req, res) => {
     try {
-        res.send(products)
+        res.status(200).json(products)
     } catch (error) {
         console.error('Error getting product\'s list:', error);
         res.status(500).send('Internal server error');
@@ -54,7 +54,7 @@ export const getAllProducts = (req, res) => {
 
 export const getProdById = (req, res) => {
     try {
-        res.send(getProduct(req, res))
+        res.status(200).json(getProduct(req, res))
     } catch (error) {
         console.error('Error getting product:', error);
         res.status(500).send('Internal server error');
@@ -75,7 +75,7 @@ export const createOrSetCart = (req, res) => {
             carts.push(userCart);
         }
         userCart.products.push(product);
-        res.status(201).send(userCart);
+        res.status(201).json(userCart);
     } catch (error){
         console.error('Error adding products in cart:', error);
         res.status(500).send('Internal server error');
@@ -96,7 +96,7 @@ export const deleteProd = (req, res) => {
             return res.status(404).send('Product not found in cart');
         }
         userCart.products.splice(prodIndex, 1);
-        res.send(userCart);
+        res.status(200).json(userCart);
     } catch (error) {
         console.error('Error adding products in cart:', error);
         res.status(500).send('Internal server error');
@@ -118,7 +118,7 @@ export const getOrder = (req, res) => {
             totalPrice: userCart.products.reduce((acc, prod) => acc + prod.price, 0)
         }
         orders.push(userOrder);
-        res.status(201).send(userOrder)
+        res.status(201).json(userOrder)
     } catch (error) {
         console.error('Error adding products in cart:', error);
         res.status(500).send('Internal server error');
