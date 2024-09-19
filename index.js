@@ -12,7 +12,7 @@ app.post('/api/register', registrationUser)
 
 app.use('/api/products', prodRouter);
 
-app.use('/api/cart/', cartRouter)
+app.use('/api/cart', cartRouter)
 
 
 app.listen(PORT, () => {

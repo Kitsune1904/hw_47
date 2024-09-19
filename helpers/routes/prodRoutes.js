@@ -4,10 +4,8 @@ import {getAllProducts, getProdById} from "../../shop/services.js";
 
 const prodRouter = Router();
 
-prodRouter.all(checkUserId)
+prodRouter.get('/', checkUserId, getAllProducts);
 
-prodRouter.get('/', getAllProducts);
-
-prodRouter.get('/:id', getProdById)
+prodRouter.get('/:id', checkUserId, getProdById)
 
 export default prodRouter

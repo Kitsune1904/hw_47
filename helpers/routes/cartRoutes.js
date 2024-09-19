@@ -4,12 +4,10 @@ import {createOrSetCart, deleteProd, getOrder} from "../../shop/services.js";
 
 const cartRouter = Router();
 
-cartRouter.all(checkUserId)
+cartRouter.put('/:id', checkUserId, createOrSetCart);
 
-cartRouter.put('/:id', createOrSetCart);
+cartRouter.delete('/:id', checkUserId, deleteProd)
 
-cartRouter.delete('/:id', deleteProd)
-
-cartRouter.post('/checkout', getOrder)
+cartRouter.post('/checkout', checkUserId, getOrder)
 
 export default cartRouter
