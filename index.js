@@ -1,24 +1,19 @@
 import express from 'express';
-import crypto from 'crypto';
-import {createOrSetCart, deleteProd, getAllProducts, getOrder, getProdById, registrationUser} from "./shop/services.js";
-import {checkUserId} from "./helpers/helpers.js";
+import prodRouter from "./helpers/routes/prodRoutes.js";
+import cartRouter from "./helpers/routes/cartRoutes.js";
+import {registrationUser} from "./shop/services.js";
 
 const PORT = 3000;
 
 const app = express();
 app.use(express.json());
 
-app.post('/api/register', await registrationUser)
+app.post('/api/register', registrationUser)
 
-app.get('/api/products', checkUserId, getAllProducts)
+app.use('/api/products', prodRouter);
 
-app.get('/api/products/:id', checkUserId, getProdById)
+app.use('/api/cart/', cartRouter)
 
-app.put('/api/cart/:id', checkUserId, createOrSetCart)
-
-app.delete('/api/cart/:id', checkUserId, deleteProd)
-
-app.post('/api/cart/checkout', checkUserId, getOrder)
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
