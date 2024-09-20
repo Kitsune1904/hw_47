@@ -23,7 +23,7 @@ export const registrationUser = async (req, res) => {
             return;
         }
         if (!isEmailValid || !isPassValid) {
-            res.status(402).send(`Invalid ${isEmailValid ? '' : 'email'} ${isPassValid ? '' : 'password'}`);
+            res.status(422).send(`Invalid ${isEmailValid ? '' : 'email'} ${isPassValid ? '' : 'password'}`);
             return;
         }
         const newUser = {
